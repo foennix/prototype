@@ -1,0 +1,10 @@
+{
+  "optionSet" : {
+    "WorkspaceRootPath" : {
+      "p" : "/Users/foennix/gamedev/prototype"
+    },
+    "BazelPath" : {
+      "p" : "/usr/local/Cellar/bazel/0.8.0/bin/bazel"
+    }
+  }
+}

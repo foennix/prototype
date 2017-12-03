@@ -1,0 +1,71 @@
+{
+  "sourceFilters" : [
+    "external/...",
+    "external/com_google_googletest",
+    "external/com_google_googletest/googlemock",
+    "external/com_google_googletest/googlemock/include",
+    "external/com_google_googletest/googlemock/include/gmock",
+    "external/com_google_googletest/googlemock/include/gmock/internal",
+    "external/com_google_googletest/googlemock/include/gmock/internal/custom",
+    "external/com_google_googletest/googlemock/src",
+    "external/com_google_googletest/googletest",
+    "external/com_google_googletest/googletest/include",
+    "external/com_google_googletest/googletest/include/gtest",
+    "external/com_google_googletest/googletest/include/gtest/internal",
+    "external/com_google_googletest/googletest/include/gtest/internal/custom",
+    "external/com_google_googletest/googletest/src",
+    "playground/..."
+  ],
+  "buildTargets" : [
+    "//playground:hello_world",
+    "//playground:hello_world_lib",
+    "//playground:hello_world_lib_test_dummy",
+    "//playground:sfml_test",
+    "//playground:sfml_user_interaction"
+  ],
+  "projectName" : "prototype",
+  "optionSet" : {
+    "BazelBuildOptionsDebug" : {
+      "p" : ""
+    },
+    "BazelBuildStartupOptionsRelease" : {
+      "p" : ""
+    },
+    "BazelBuildOptionsRelease" : {
+      "p" : ""
+    },
+    "TestActionPreActionScript" : {
+      "p" : ""
+    },
+    "BuildActionPostActionScript" : {
+      "p" : ""
+    },
+    "LaunchActionPreActionScript" : {
+      "p" : ""
+    },
+    "EnvironmentVariables" : {
+      "p" : ""
+    },
+    "BuildActionPreActionScript" : {
+      "p" : ""
+    },
+    "CommandlineArguments" : {
+      "p" : ""
+    },
+    "TestActionPostActionScript" : {
+      "p" : ""
+    },
+    "ALWAYS_SEARCH_USER_PATHS" : {
+      "p" : "YES"
+    },
+    "BazelBuildStartupOptionsDebug" : {
+      "p" : ""
+    },
+    "LaunchActionPostActionScript" : {
+      "p" : ""
+    }
+  },
+  "additionalFilePaths" : [
+    "playground/BUILD"
+  ]
+}

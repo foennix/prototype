@@ -1,0 +1,12 @@
+{
+  "configDefaults" : {
+    "optionSet" : {
+
+    }
+  },
+  "projectName" : "prototype",
+  "packages" : [
+    "playground"
+  ],
+  "workspaceRoot" : "../.."
+}
