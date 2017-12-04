@@ -17,6 +17,7 @@
     "playground/..."
   ],
   "buildTargets" : [
+    "//playground:dialog_box",
     "//playground:hello_world",
     "//playground:hello_world_lib",
     "//playground:hello_world_lib_test_dummy",

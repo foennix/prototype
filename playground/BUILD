@@ -4,6 +4,22 @@ cc_library(
     srcs = ["hello_world_lib.cc"]
 )
 
+# A multiple choice dialog for use in SFML.
+cc_library(
+    name = "dialog_box",
+    hdrs = ["dialog_box.h"],
+    srcs = ["dialog_box.cc"],
+    deps = [":click_handler"],
+    copts = ["-I/usr/local/include/"],
+)
+
+# An abstract class to implement click handlers for use in dialog boxes
+cc_library(
+    name = "click_handler",
+    hdrs = ["click_handler.h"],
+    srcs = ["click_handler.cc"]
+)
+
 cc_binary(
     name = "sfml_test",
     srcs = ["sfml_test.cc"],
@@ -22,6 +38,7 @@ cc_binary(
 cc_binary(
     name = "sfml_user_interaction",
     srcs = ["sfml_user_interaction.cc"],
+    deps = [":dialog_box", ":click_handler"],
     copts = ["-I/usr/local/include/"],
     linkopts = [
       "-L/usr/local/lib",
