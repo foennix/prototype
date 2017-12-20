@@ -2,35 +2,51 @@
 
 #include <iostream>
 
-DialogBox::DialogBox(const sf::Font& font, std::string text, std::vector<std::string> options, std::vector<ClickHandler*> handler, int x, int y) : x_(x), y_(y), background_(sf::Vector2<float>(800, 400)),draggable_area_(sf::Vector2<float>(800, 30)),  text_(text, font, 28), dragged_(false), x_offset_dragged_(0), y_offset_dragged_(0), handler_(handler), selection_(-1) {
-    
-    // Does text know its width and height? Then we could use that to construct the shapes.
+namespace {
+const int kTitleBarHeight = 30;
+const int kTextSize = 28;  // Make a parameter?
+const int kMarginBetweenOptions = 2;
+const int kMarginTextTitle = 5;
+const int kOptionsMargin = 100;  // Margin between text and options.
+const int kHorizontalMargin = 30; // Horizontal margin between text and dialog box border. Half of this on each side.
+}  // namespace
+
+DialogBox::DialogBox(const sf::Font& font, std::string text, std::vector<std::string> options, std::vector<ClickHandler*> handler, int x, int y) : x_(x), y_(y), background_(sf::Vector2<float>(800, 400)),titlebar_(sf::Vector2<float>(800, kTitleBarHeight)),  text_(text, font, kTextSize), dragged_(false), x_offset_dragged_(0), y_offset_dragged_(0), handler_(handler), selection_(-1) {
     
     background_.setFillColor(sf::Color::Yellow);
     background_.setOutlineColor(sf::Color::Black);
     background_.setOutlineThickness(2.0);
+    titlebar_.setFillColor(sf::Color::Cyan);
+    titlebar_.setOutlineColor(sf::Color::Black);
+    titlebar_.setOutlineThickness(2.0);
     
-    
-    draggable_area_.setFillColor(sf::Color::Blue);
-    
-   
+    std::cout << "Height of text: " << text_.getGlobalBounds().height << std::endl;
+    float height = kMarginTextTitle + text_.getGlobalBounds().height + kOptionsMargin;
+    std::cout << "Height: " << height << std::endl;
+    float width = text_.getGlobalBounds().width + kHorizontalMargin;
     text_.setFillColor(sf::Color::Black);
     for (std::string option : options) {
-        options_.push_back(sf::Text(option, font, 28));
+        options_.push_back(sf::Text(option, font, kTextSize));
         options_.back().setFillColor(sf::Color::Black);
+        height += (kTextSize + kMarginBetweenOptions);
+        std::cout << "Height: " << height << std::endl;
+        width = std::max((float)width, options_.back().getGlobalBounds().width + kHorizontalMargin);
     }
+    background_.setSize(sf::Vector2<float>(width, height));
+    titlebar_.setSize(sf::Vector2<float>(width, kTitleBarHeight));
+    
 }
 void DialogBox::Draw(sf::RenderWindow* window) {
     background_.setPosition(x_, y_);  // TODO: Check if rotations work better with position or origin here (and ordering of transforms!).
-    draggable_area_.setPosition(x_, y_);
-    text_.setPosition(x_ + 5, y_ + 35);
+    titlebar_.setPosition(x_, y_);
+    text_.setPosition(x_ + kHorizontalMargin / 2, y_ + kTitleBarHeight + kMarginTextTitle);
     window->draw(background_);
-    window->draw(draggable_area_);
+    window->draw(titlebar_);
     window->draw(text_);
     
     int i = 0;
     for (sf::Text& option : options_) {
-        option.setPosition(x_ + 5, y_ + 100 + 30 * i);
+        option.setPosition(x_ + kHorizontalMargin / 2, y_ + text_.getGlobalBounds().height + kOptionsMargin + (kTextSize + kMarginBetweenOptions) * i);
         if (selection_ == i) {
             option.setFillColor(sf::Color::Red);
         } else {
@@ -48,13 +64,12 @@ void DialogBox::EvaluateEvent(sf::Event event) {
     // On Mouse down we enable dragging if in the draggable area. On Mouse movement we drag if dragging is enabled. On Mouse up we disable dragging.
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         std::cout << "Dialog Box captured: Mouse clicked: " << event.mouseButton.x << "/" << event.mouseButton.y << std::endl;
-        if (event.mouseButton.x > draggable_area_.getPosition().x && event.mouseButton.x < draggable_area_.getPosition().x + 800 &&
-            event.mouseButton.y > draggable_area_.getPosition().y && event.mouseButton.y < draggable_area_.getPosition().y + 30) {
+        if (titlebar_.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
             std::cout << "And was in draggable area." << std::endl;
             dragged_ = true;
             // Save position of the Mouse relative to the window, so we can drag.
-            x_offset_dragged_ = event.mouseButton.x - draggable_area_.getPosition().x;
-            y_offset_dragged_ = event.mouseButton.y - draggable_area_.getPosition().y;
+            x_offset_dragged_ = event.mouseButton.x - titlebar_.getPosition().x;
+            y_offset_dragged_ = event.mouseButton.y - titlebar_.getPosition().y;
         }
     }
     

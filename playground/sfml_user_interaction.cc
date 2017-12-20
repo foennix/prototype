@@ -38,7 +38,7 @@ int main(int, char const**)
     //sf::Text text("Hello SFML", font, 50);
     //text.setFillColor(sf::Color::Black);
     
-    DialogBox box(font, "Hello Box!", {"Ok", "Cancel"}, {new OkHandler(), new CancelHandler()}, 75, 20);  // Ownership of handlers where?
+    DialogBox box(font, "Test Test Test Test Test \nTest Test Test\nTest", {"Ok", "Cancel"}, {new OkHandler(), new CancelHandler()}, 75, 20);  // Ownership of handlers where?
     
     
     // Start the game loop

@@ -17,12 +17,16 @@
     "playground/..."
   ],
   "buildTargets" : [
+    "//playground:click_handler",
     "//playground:dialog_box",
     "//playground:hello_world",
     "//playground:hello_world_lib",
     "//playground:hello_world_lib_test_dummy",
     "//playground:sfml_test",
-    "//playground:sfml_user_interaction"
+    "//playground:sfml_user_interaction",
+    "//playground:sfml_zoomable_starfield",
+    "//playground:solar_system_model",
+    "//playground:solar_system_view"
   ],
   "projectName" : "prototype",
   "optionSet" : {

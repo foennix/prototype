@@ -20,6 +20,22 @@ cc_library(
     srcs = ["click_handler.cc"]
 )
 
+# Model classes for the solar system represented int the starfield.
+cc_library(
+     name = "solar_system_model",
+     hdrs = ["solar_system_model.h"],
+     srcs = ["solar_system_model.cc"]
+)
+
+# View classes for the solar system. These offer draw functions.
+cc_library(
+     name = "solar_system_view",
+     hdrs = ["solar_system_view.h"],
+     srcs = ["solar_system_view.cc"],
+     deps = [":solar_system_model"],
+     copts = ["-I/usr/local/include/"],
+)
+
 cc_binary(
     name = "sfml_test",
     srcs = ["sfml_test.cc"],
@@ -52,6 +68,26 @@ cc_binary(
     data = [
       ":Fonts/arial.ttf"
     ],
+)
+
+cc_binary(
+    name = "sfml_zoomable_starfield",
+    srcs = ["sfml_starfield.cc"],
+    copts = ["-I/usr/local/include/"],
+    linkopts = [
+      "-L/usr/local/lib",
+      "-lsfml-graphics",
+      "-lsfml-window",
+      "-lsfml-system",
+      "-lsfml-network",
+      "-lsfml-audio",
+      "-lpthread",
+     ],
+     deps = [":solar_system_model",
+             ":solar_system_view"],
+     data = [
+        ":Img/sun.png"
+     ],
 )
 
 cc_binary(

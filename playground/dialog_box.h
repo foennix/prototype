@@ -13,7 +13,7 @@ class DialogBox {
     int y_;
     
     sf::RectangleShape background_;
-    sf::RectangleShape draggable_area_;
+    sf::RectangleShape titlebar_;
     sf::Text text_;
     std::vector<sf::Text> options_;
     
