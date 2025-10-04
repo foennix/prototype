@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Village Needs Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Village Needs Simulator</h1>
+        <p>Watch how the villagers work together to keep everyone fed, hydrated, and rested.</p>
+      </header>
+
+      <section class="dashboard">
+        <div class="resources" id="resource-panel"></div>
+        <div class="controls">
+          <button id="toggle-sim">Start</button>
+          <button id="step-sim">Step</button>
+          <span id="tick-display">Day 0</span>
+        </div>
+      </section>
+
+      <section class="village" id="village-grid"></section>
+
+      <section class="log">
+        <h2>Activity Log</h2>
+        <div id="log"></div>
+      </section>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
